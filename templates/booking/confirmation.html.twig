@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de réservation{% endblock %}
+
+
+{% block body %}
+
+<div id="confirmContainer">
+
+    <div id="confirmText">
+        <h2 id="confirmThanks">Merci, {{ user.firstname }} ! Votre réservation pour le vol a été confirmée.</h2>
+        <h3>Vous pouvez dès maintenant retrouver votre réservation en cliquant ici : <a class="confirmLink" href="{{ path('account') }}">Voir ma réservation</a></h3>
+<h3>Si vous préférez retourner sur la page d'accueil, vous pouvez cliquer ici : <a class="confirmLink" href="{{ path('homepage') }}">Retourner à la page d'accueil</a></h3>
+    </div>
+
+<div id="confirmBannerCtn">
+    <img id="confirmBanner" src="{{asset('./images/booking/banner.svg')}}" alt="avion">
+</div>
+
+
+</div>
+
+{% endblock %}

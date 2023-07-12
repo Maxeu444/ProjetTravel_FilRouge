@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Flight Search{% endblock %}
+
+{% block body %}
+
+<div id="searchBarSection">
+    <h2 id="homepageSearchTitle">Les meilleurs offres de vols dans le <br>
+        monde entier</h2>
+    <div id="searchBar">
+        {{ form_start(searchForm, {'attr': {'id': ''}}) }}
+        <div id="filterContain">
+            {{ form_widget(searchForm.departure_airport, {'value': defaults.departure_airport, 'attr': {
+            'class': 'airportSelect',
+            'id':'departure',
+            }}) }}
+
+            {{ form_widget(searchForm.arrival_airport, {'value': defaults.arrival_airport, 'attr': {
+            'class': 'airportSelect',
+            }}) }}
+            {{ form_widget(searchForm.departure_datetime, {'attr': {
+            'id': 'dateSelect',
+            }}) }}
+        </div>
+
+        <button type="submit" id="search_flight_search"> Trouver un vol <i class="far fa-arrow-right"></i></button>
+        {{ form_end(searchForm) }}
+    </div>
+</div>
+
+{% if flights is defined %}
+{% if flights|length == 0 %}
+<p>No flights found.</p>
+{% else %}
+
+<h2 id="resultTitle">Résultats</h2>
+
+<div id="cardDetailContrainer">
+
+    <div id="cardContainer">
+
+        {% for flight in flights %}
+
+        <!-- Carte de résultat pour chaque vol -->
+        <div class="resultCard" id="resultCard" data-flight-id="{{ flight.id }}" onclick="showFlightDetails(event)">
+            <h3 id="searchCardTitle">Sélectionner ce vol</h3>
+            <h5>{{ flight.departureDatetime|format_datetime(pattern="EEE dd MMMM - HH:mm", locale='fr') }}</h5>
+            <p>{{ flight.departureAirport.code }} > {{ flight.arrivalAirport.code }} </p>
+
+            <p id="searchCardPrice"> à partir de <span id="spanPrice">{{ flight.price }}€</span></p>
+        </div>
+        <!-- Détails du vol cachés pour chaque vol -->
+        <div class="flightDetails" id="flightDetails-{{ flight.id }}" style="display: none;">
+            {% include 'search/flightDetails.html.twig' %}
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Conteneur pour afficher les détails du vol sélectionné -->
+    <div id="selected-flight-details">
+
+    </div>
+    {% endif %}
+    {% endif %}
+
+</div>
+</div>
+{% block javascripts %}
+<script src="{{ asset('js/searchBar.js') }}"></script>
+{% endblock %}
+{% endblock %}

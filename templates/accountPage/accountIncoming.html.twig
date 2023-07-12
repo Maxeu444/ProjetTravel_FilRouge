@@ -1,0 +1,32 @@
+{# {% include 'accountPage/accountPanel.html.twig' %} #}
+
+<div id="incommingContainer">
+
+<div class="incommingSection">
+  <h3 class="sctnTitle">Liste des vols</h3>
+</div>
+
+<table id="incomingFlight">
+  <thead>
+    <tr>
+      <th id="th1Incomming">Départ</th>
+      <th>Arrivée</th>
+      <th>Date de départ</th>
+      <th>Heure de départ</th>
+      <th id="th4Incomming">Heure d'arrivée</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for flight in flights %}
+    <tr id="trIncomming">
+      <td>{{ flight.departureAirport.code}}</td>
+      <td>{{ flight.arrivalAirport.code }}</td>
+      <td>{{ flight.departureDatetime|format_datetime(pattern="EEE dd MMMM", locale='fr') }}</td>
+      <td>{{ flight.departureDatetime|date('H:i') }}</td>
+      <td>{{ flight.arrivalDatetime|date('H:i') }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</div>

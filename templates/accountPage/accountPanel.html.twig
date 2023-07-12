@@ -1,0 +1,53 @@
+<div id="panelContainer">
+
+  <div id="profilPanel">
+    <img id="ProfilePic" src="./images/accountPage/pp.jpg" alt="" />
+    <h3>Bonjour <span id="user">{{user.firstname}}</span> !</h3>
+    <p id="profileMail">{{user.email}}</p>
+  </div>
+  {# <div id="sectionBtn">
+    <button class="section" id="account">
+      <img src="./images/accountPage/accountBtn.svg" id="accountIcon" />
+      <a id="accountTitle" href="{{ path('account_info') }}">Compte</a>
+      <img src="./images/accountPage/chevron right.svg" id="chevron" class="btnIcons" />
+    </button>
+
+    <button class="section" id="account">
+      <img src="./images/accountPage/historic.svg" id="accountIcon" />
+      <a id="accountTitle" href="{{ path('history_flights') }}">Historique</a>
+      <img src="./images/accountPage/chevron right.svg" id="chevron" class="btnIcons" />
+    </button>
+
+    <button class="section" id="account">
+      <img src="./images/accountPage/incoming.svg" id="accountIcon" />
+      <a id="accountTitle" href="{{ path('incoming_flights') }}">Mes futurs voyages</a>
+      <img src="./images/accountPage/chevron right.svg" id="chevron" class="btnIcons" />
+    </button>
+  </div> #}
+
+  <div id="sectionBtn">
+    <button class="section" id="account" data-path="{{ path('account_info_partial') }}">
+      <img src="./images/accountPage/accountBtn.svg" id="accountIcon" />
+      <a id="accountTitle" >Compte</a>
+      <img src="./images/accountPage/chevron right.svg" id="chevron" class="btnIcons" />
+    </button>
+    
+    <button class="section" id="account" data-path="{{ path('incoming_flights') }}">
+      <img src="./images/accountPage/incoming.svg" id="accountIcon" />
+      <a id="accountTitle" >Mes futurs voyages</a>
+      <img src="./images/accountPage/chevron right.svg" id="chevron" class="btnIcons" />
+    </button>
+
+    <button class="section" id="account" data-path="{{ path('history_flights') }}">
+      <img src="./images/accountPage/historic.svg" id="accountIcon" />
+      <a id="accountTitle">Historique</a>
+      <img src="./images/accountPage/chevron right.svg" id="chevron" class="btnIcons" />
+    </button>
+
+    
+  </div>
+
+  <div id="disconectBtn">
+    <a href="{{ path('app_logout') }}">Me déconnecter</a>
+  </div>
+</div>

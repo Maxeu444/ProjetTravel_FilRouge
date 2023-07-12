@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %} {% block title %}Réservation{% endblock %} {%
+block body %}
+
+
+<div id="bookingHeader">
+    <p id="bkgHeaderDetails">Détails <span></span></p>
+    <p id="bkgHeaderConfirm">Confirmation</p>
+</div>
+
+
+
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+  {{ message }}
+</div>
+{% endfor %} {% for message in app.flashes('error') %}
+<div class="alert alert-danger">
+  {{ message }}
+</div>
+{% endfor %}
+
+<div id="bookingContainer">
+  <div id="bookingUserInfo">
+    
+
+    <div class="bookingInfoDisplay" id="infoDisplayTitle">
+        <h2 id="infosTitle">Vos informations</h2>
+    </div>
+
+    <div class="bookingInfoDisplay">
+      <p>Nom d'utilisateur :</p>
+      <span class="bookingSpan">{{ user.username }}</span>
+    </div>
+    <div class="bookingInfoDisplay">
+      <p>Prénom :</p>
+      <span class="bookingSpan">{{ user.firstname }}</span>
+    </div>
+    <div class="bookingInfoDisplay">
+      <p>Nom :</p>
+      <span class="bookingSpan">{{ user.lastname }}</span>
+    </div>
+    <div class="bookingInfoDisplay">
+      <p>Email :</p>
+      <span class="bookingSpan">{{ user.email }}</span>
+    </div>
+  </div>
+
+  <div id="bookingFlightInfo">
+    <div id="bookingDetails">
+      <h2 id="detailsTitle">Votre reservation</h2>
+      <div id="columnContainer">
+        <div class="columnDetails" id="clmn1">
+          <p class="pDetails">
+            Date
+            <span
+              >{{ flight.departureDatetime|format_datetime(pattern="EEE dd MMMM",
+                            locale='fr') }}</span
+            >
+          </p>
+          <p class="pDetails">
+            Aéroport de départ
+            <span
+              >{{ flight.departureAirport.name }} ({{
+                flight.departureAirport.code
+              }})</span
+            >
+          </p>
+          <p class="pDetails">
+            Numéro de l'avion <span>{{ flight.number }}</span>
+          </p>
+        </div>
+
+        <div class="columnDetails">
+          <p class="pDetails">
+            Horaire de décollage
+            <span>{{ flight.departureDatetime|date('H:i') }}</span>
+          </p>
+          <p class="pDetails">
+            Aéroport d'arrivée
+            <span
+              >{{ flight.arrivalAirport.name }} ({{
+                flight.arrivalAirport.code
+              }})</span
+            >
+          </p>
+          <p class="pDetails">
+            Modèle de l'avion <span>{{ flight.planeId.model }}</span>
+          </p>
+        </div>
+
+        <div id="2row">
+          <p class="pDetails">
+            Horaire d'atterrissage
+            <span>{{ flight.arrivalDatetime|date('H:i') }}</span>
+          </p>
+          <p class="pDetails">
+            Compagnie <span>{{ flight.airline }}</span>
+          </p>
+        </div>
+      </div>
+
+      <form
+        action="{{ path('app_addBooking', { flight_id: flight.id }) }}"
+        method="post"
+      >
+        <button type="submit" id="bookingDetailsButton" class="btn btn-primary">
+          Réserver ce vol
+        </button>
+      </form>
+    </div>
+
+    {#
+    <h2>Votre reservation</h2>
+    <p>Numéro de vol : {{ flight.number }}</p>
+    <p>Date et heure : {{ flight.departureDatetime|date('d/m/Y H:i') }}</p>
+    <p>
+      Départ : {{ flight.departureAirport.name }} ({{
+        flight.departureAirport.code
+      }})
+    </p>
+    <p>
+      Arrivée : {{ flight.arrivalAirport.name }} ({{
+        flight.arrivalAirport.code
+      }})
+    </p>
+    <p>Compagnie aérienne : {{ flight.airline }}</p>
+    <p>Numéro de l'avion : {{ flight.number }}</p>
+    <p>Modèle de l'avion : {{ flight.planeId.model }}</p>
+
+    <form
+      action="{{ path('app_addBooking', { flight_id: flight.id }) }}"
+      method="post"
+    >
+      <button type="submit" class="btn btn-primary">Réserver ce vol</button>
+    </form>
+  </div>
+  #}
+</div>
+
+{% endblock %} {% block javascripts %}
+<script src="{{ asset('js/booking.js') }}"></script>
+{% endblock %}

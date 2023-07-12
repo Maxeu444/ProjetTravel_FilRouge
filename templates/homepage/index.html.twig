@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block homeHeader %}
+
+<div id="headerContent">
+    <div class="lignes">
+        <div class="l1"></div>
+        <div class="l2"></div>
+    </div>
+
+    <div id="containerTitle">
+        <h1 id="homepageTitle"><span>BESOIN </span><span>DE </span><span>CHANGER </span><span>D'AIR ? </span></h1>
+        <h1 id="homepageSubtitle">Découvrez toutes nos offres de vols</h1>
+    </div>
+
+    <img src="./images/logo.svg" class="logoHeader" alt="Logo TravelProjet" />
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+
+
+<div id="homeSearchContainer">
+
+    <h2 id="homepageSearchTitle">Les meilleurs offres de vols dans le <br>
+        monde entier</h2>
+
+    <div id="searchBarBlue">
+        {{ form_start(searchForm, {'attr': {'id': ''}}) }}
+        <div id="filterContain">
+            {{ form_widget(searchForm.departure_airport, {'attr': {'class': 'airportSelect', 'id':'departure',
+            'placeholder': 'Départ
+            de'}}) }}
+            {{ form_widget(searchForm.arrival_airport, {'attr': {'class': 'airportSelect', 'placeholder':
+            'Destination'}}) }}
+            {{ form_widget(searchForm.departure_datetime, {'attr': {'id': 'dateSelect', 'placeholder': 'Date de
+            départ'}}) }}
+        </div>
+
+        <button type="submit" id="search_flight_search"> Trouver un vol <i class="far fa-arrow-right"></i></button>
+        {# {{ form_widget(searchForm.search, {'label': '<i class="fas fa-arrow-alt-right"></i> Trouver un vol', 'attr':
+        {'id': 'searchBtn', 'type': 'submit'}}) }} #}
+        {{ form_end(searchForm) }}
+    </div>
+
+    <img src="{{asset('/images/homepage/avion.svg')}}" alt="avion et immeubles" id="searchBanner">
+</div>
+
+<div id="popularOffer">
+
+
+    <div id="cardContainer">
+
+        <h2 id="offerTitle">Découvrez nos offres populaires ! 🔥</h2>
+
+
+        <div id="cardsDisplay">
+            {% for flight in flights %}
+            <a href="/search?code={{ flight.arrivalAirport.code }}">
+                <div class="homeCard">
+                    <div class="offerCardImg"
+                        style="background-image: url('./images/homepage/{{ flight.arrivalAirport.city }}.jpg');">
+                    </div>
+                    <div class="offerCardInfo">
+                        <h3 id="searchCardTitle" class="cardInfoTxt">{{ flight.arrivalAirport.city }}</h3>
+                        <p id="searchCardPrice"> à partir de <span id="spanPrice">{{ flight.price }}€</span></p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+
+        {# <div class="homeCardRow">
+            <div class="homeCard">
+
+
+            </div>
+
+        </div> #}
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="{{asset('js/home.js')}}"></script>
+
+{% endblock %}

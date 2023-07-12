@@ -1,0 +1,31 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block body %}
+    <h1>Search Results</h1>
+
+    {% if flights|length == 0 %}
+        <p>No flights found.</p>
+    {% else %}
+        <ul>
+            {% for flight in flights %}
+                <li>
+                {{ flight.departureAirport.code}}
+                {{ flight.departureAirport.name}}, {{ flight.departureAirport.city}}, {{ flight.departureAirport.country}} 
+                to 
+                <br>{{ flight.arrivalAirport.code }}
+                {{ flight.arrivalAirport.name }}, {{ flight.arrivalAirport.city}}, {{ flight.arrivalAirport.country}}
+                <br>Numéro de Vol :
+                {{ flight.number }}
+                <br>Date/Heure de Départ :  
+                {{ flight.departureDatetime|date('d-m-Y H:i:s') }}
+                 <br>Date/Heure d'Arrivé :
+                {{ flight.arrivalDatetime|date('d-m-Y H:i:s') }}
+                
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %} #}
+

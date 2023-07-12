@@ -1,0 +1,62 @@
+<div id="infoContainer">
+  <div id="accountHead">
+    <h2>Compte</h2>
+  </div>
+
+  <div class="accountSection">
+    <h4 class="sctnTitle">Informations générales</h4>
+  </div>
+
+  <div class="infoDiv" id="username">
+    <p>Nom d'utilisateur</p>
+    <h3>{{ user.username }}</h3>
+  </div>
+
+  {{ form_start(form, {'attr': {'class': 'account-update-form'}}) }}
+
+  <div class="infoDiv" id="lastname">
+    <p>Nom</p>
+    <h3 id="lastnameH3">{{ user.lastname}}</h3>
+    <div id="lastnameDiv" style="display: none">
+      {{ form_row(form.lastname, { 'attr': {'class': 'infoDiv', 'id': 'lastnameDiv', 'value': user.lastname} }) }}
+    </div>
+  </div>
+
+  <div class="infoDiv" id="firtname">
+    <p>Prénom</p>
+    <h3 id="firstnameH3">{{user.firstname}}</h3>
+    <div id="firstnameDiv" style="display: none">
+      {{ form_row(form.firstname, { 'attr': {'class': 'infoDiv', 'id': 'firstnameDiv', 'value': user.firstname} }) }}
+    </div>
+  </div>
+
+  <div class="infoDiv" id="email">
+    <p>E-mail</p>
+    <h3 id="emailH3">{{user.email}}</h3>
+    <div id="emailDiv" style="display: none;padding:5%">
+      {{ form_row(form.email, { 'attr': {'class': 'infoDiv', 'id': 'emailDiv', 'value': user.email} }) }}
+    </div>
+  </div>
+
+  <div class="accountSection">
+    <h4 class="sctnTitle">Compte</h4>
+  </div>
+
+  <div id="actionBtn">
+    <div class="buttonsAction" id="editBtn" onclick="editInfo()">
+      <p>Modifier mes informations</p>
+    </div>
+
+    <div class="buttonsAction" id="deleteBtn" onclick="deleteAccount()">
+      <p>Supprimer mon compte</p>
+    </div>
+
+    <div class="buttonsAction" id="saveBtn" style="display: none;">
+      <button type="submit" id="submitBtn">Enregistrer</button>
+    </div>
+
+    {{ form_end(form) }}
+
+  </div>
+</div>
+
